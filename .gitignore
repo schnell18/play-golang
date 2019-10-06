@@ -1,0 +1,9 @@
+.idea/
+.iml
+.iws
+.ipr
+*.swp
+*.swo
+**/*.rs.bk
+**/*.o
+**/*.so
