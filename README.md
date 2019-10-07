@@ -1,9 +1,12 @@
 # Introduction
 
-This is a collection mini golang project to practise *go* programming.
+This is a collection mini golang projects to practise *go* programming.
 
 ## Catelog
 
-| sub-directory      | comment                            |
-| ------------------ | ---------------------------------- |
-| fibonacci          | calculate fibonacci series         |
+| sub-directory      | comment                                     |
+| ------------------ | --------------------------------------      |
+| fibonacci          | calculate fibonacci series                  |
+| sqrt               | calculate square root w/ [Newton method][1] |
+
+[1]: https://en.wikipedia.org/wiki/Newton%27s_method
