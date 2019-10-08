@@ -1,9 +1,20 @@
 package main
 
-import "fmt"
+import (
+    "os"
+    "fmt"
+    "strconv"
+)
 
 func main() {
-	println(Sqrt(10))
+
+    for _, arg := range os.Args[1:] {
+        if f, err := strconv.ParseFloat(arg, 64); err == nil {
+            fmt.Println(Sqrt(f))
+        } else {
+            fmt.Printf("bad input %s\n", arg)
+        }
+    }
 }
 
 func Sqrt(x float64) float64 {
@@ -16,7 +27,7 @@ func Sqrt(x float64) float64 {
 			abs = -abs
 		}
 		if abs <= 0.00000000000001 {
-			fmt.Printf("%02d = %.15f\n", i, z)
+			// fmt.Printf("%02d = %.15f\n", i, z)
 			break
 		} else {
 			z0 = z

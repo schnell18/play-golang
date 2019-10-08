@@ -1,7 +1,20 @@
 package main
 
+import (
+    "os"
+    "fmt"
+    "strconv"
+)
+
 func main() {
-	println(Fib(10))
+
+    for _, arg := range os.Args[1:] {
+        if n, err := strconv.ParseUint(arg, 10, 64); err == nil {
+            fmt.Println(Fib(n))
+        } else {
+            fmt.Printf("bad input %s\n", arg)
+        }
+    }
 }
 
 func Fib(n uint64) uint64 {
