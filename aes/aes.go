@@ -15,13 +15,13 @@ const _IV = "aabbccddeeffgghh"
 
 func main() {
 	if len(os.Args) < 3 {
-		fmt.Errorf("USAGE: %s key text1 text2 \n", os.Args[0])
+		log.Fatalf("USAGE: %s key text1 text2 \n", os.Args[0])
 		return
 	}
 	key := os.Args[1]
 	if strings.Contains(os.Args[0], "aes-decrypt") {
 		for _, text := range os.Args[2:] {
-			source, err := AESBase64Decrypt(text, key)
+			source, err := decrypt(text, key)
 			if err != nil {
 				log.Println(err)
 			}
@@ -29,7 +29,7 @@ func main() {
 		}
 	} else {
 		for _, text := range os.Args[2:] {
-			txt, err := AESBase64Encrypt(text, key)
+			txt, err := encrypt(text, key)
 			if err != nil {
 				log.Println(err)
 				return
@@ -40,7 +40,7 @@ func main() {
 }
 
 // Encrypt with AES/CBC/PKCS5Padding and base64-encoded
-func AESBase64Encrypt(plainText string, key string) (secretText string, err error) {
+func encrypt(plainText string, key string) (secretText string, err error) {
 	iv := []byte(_IV)
 	var block cipher.Block
 	if block, err = aes.NewCipher([]byte(key)); err != nil {
@@ -48,14 +48,14 @@ func AESBase64Encrypt(plainText string, key string) (secretText string, err erro
 		return
 	}
 	encrypt := cipher.NewCBCEncrypter(block, iv)
-	var source []byte = _PKCS5Padding([]byte(plainText), 16)
+	var source []byte = pkcs5pad([]byte(plainText), 16)
 	var dst []byte = make([]byte, len(source))
 	encrypt.CryptBlocks(dst, source)
 	secretText = base64.StdEncoding.EncodeToString(dst)
 	return
 }
 
-func AESBase64Decrypt(secretText string, key string) (plainText string, err error) {
+func decrypt(secretText string, key string) (plainText string, err error) {
 	iv := []byte(_IV)
 	var block cipher.Block
 	if block, err = aes.NewCipher([]byte(key)); err != nil {
@@ -71,17 +71,17 @@ func AESBase64Decrypt(secretText string, key string) (plainText string, err erro
 	}
 	var dst []byte = make([]byte, len(source))
 	encrypt.CryptBlocks(dst, source)
-	plainText = string(_PKCS5Unpadding(dst))
+	plainText = string(pkcs5unpad(dst))
 	return
 }
 
-func _PKCS5Padding(ciphertext []byte, blockSize int) []byte {
+func pkcs5pad(ciphertext []byte, blockSize int) []byte {
 	padding := blockSize - len(ciphertext)%blockSize
 	padtext := bytes.Repeat([]byte{byte(padding)}, padding)
 	return append(ciphertext, padtext...)
 }
 
-func _PKCS5Unpadding(origData []byte) []byte {
+func pkcs5unpad(origData []byte) []byte {
 	length := len(origData)
 	unpadding := int(origData[length-1])
 	return origData[:(length - unpadding)]
