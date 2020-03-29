@@ -1,23 +1,7 @@
-package main
+package fibonacci
 
-import (
-    "os"
-    "fmt"
-    "strconv"
-)
-
-func main() {
-
-    for _, arg := range os.Args[1:] {
-        if n, err := strconv.ParseUint(arg, 10, 64); err == nil {
-            fmt.Println(Fib(n))
-        } else {
-            fmt.Printf("bad input %s\n", arg)
-        }
-    }
-}
-
-func Fib(n uint64) uint64 {
+// Fibonacci Calculate nth fibonacci number
+func Fibonacci(n uint64) uint64 {
 	if n == 0 {
 		return 0
 	}
