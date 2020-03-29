@@ -20,18 +20,18 @@ func main() {
 
 func visit(links []string, n *html.Node) []string {
 	if n != nil {
-		if n.Type == html.ElementNode && n.Data == "a" {
+		if n.Type == html.ElementNode && (n.Data == "a" || n.Data == "img" || n.Data == "script") {
 			for _, a := range n.Attr {
 				if a.Key == "href" {
+					links = append(links, a.Val)
+				} else if a.Key == "src" {
 					links = append(links, a.Val)
 				}
 			}
 		}
-		// for c := n.FirstChild; c != nil; c = c.NextSibling {
-		// 	links = visit(links, c)
-		// }
-		links = visit(links, n.FirstChild)
-		links = visit(links, n.NextSibling)
+		for c := n.FirstChild; c != nil; c = c.NextSibling {
+			links = visit(links, c)
+		}
 	}
 	return links
 }
