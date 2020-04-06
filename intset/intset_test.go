@@ -83,3 +83,83 @@ func TestString(t *testing.T) {
 	}
 
 }
+
+func TestLen(t *testing.T) {
+	seta := []int{1, 11, 10, 101, 100}
+	s1 := IntSet{}
+
+	for _, i := range seta {
+		s1.Add(i)
+	}
+
+	if s1.Len() != 5 {
+		t.Errorf("IntSet %v s1.Len() returns %v != 5", s1, s1.Len())
+	}
+
+}
+
+func TestRemove(t *testing.T) {
+	exp := "{1 10 11 100 101}"
+	seta := []int{1, 11, 10, 101, 100}
+	s1 := IntSet{}
+
+	for _, i := range seta {
+		s1.Add(i)
+	}
+
+	// should take no effect
+	s1.Remove(55)
+	if s1.String() != exp {
+		t.Errorf("IntSet %v s1.remove(55) returns %v != %s", s1, &s1, exp)
+	}
+
+	// should delete 101
+	s1.Remove(101)
+	exp = "{1 10 11 100}"
+	if s1.String() != exp {
+		t.Errorf("IntSet %v s1.remove(101) returns %v != %s", s1, &s1, exp)
+	}
+
+}
+
+func TestClear(t *testing.T) {
+	exp := "{}"
+	seta := []int{1, 11, 10, 101, 100}
+	s1 := IntSet{}
+
+	for _, i := range seta {
+		s1.Add(i)
+	}
+
+	// should be empty
+	s1.Clear()
+	if s1.String() != exp {
+		t.Errorf("IntSet s1.Clear() returns %v != %s", &s1, exp)
+	}
+
+}
+
+func TestCopy(t *testing.T) {
+	exp := "{1 10 11 100 101}"
+	seta := []int{1, 11, 10, 101, 100}
+	s1 := IntSet{}
+
+	for _, i := range seta {
+		s1.Add(i)
+	}
+
+	s2 := s1.Copy()
+	if s2.String() != exp {
+		t.Errorf("Cloned IntSet %v s2.String() returns %v != %s", *s2, s2, exp)
+	}
+
+	// add 55 to the clone and the original copy should remove unchanged
+	s2.Add(55)
+	exp2 := "{1 10 11 55 100 101}"
+	if s2.String() != exp2 {
+		t.Errorf("Cloned IntSet %v calls s2.Add(55) returns %v != %s", s2, &s1, exp2)
+	}
+	if s1.String() != exp {
+		t.Errorf("Original IntSet %v s1.String() returns %v != %s", s1, s1.String(), exp)
+	}
+}

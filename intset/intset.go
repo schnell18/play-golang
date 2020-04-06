@@ -26,6 +26,42 @@ func (s *IntSet) Add(x int) {
 	s.words[word] |= 1 << bit
 }
 
+// Len returns the length of IntSet
+func (s *IntSet) Len() int {
+	len := 0
+	for _, word := range s.words {
+		for j := 0; j < 64; j++ {
+			if word&(1<<j) != 0 {
+				len++
+			}
+		}
+	}
+	return len
+}
+
+// Remove deletes the give non-negative integer from the IntSet
+func (s *IntSet) Remove(x int) {
+	word, bit := x/64, uint(x%64)
+	if word < len(s.words) {
+		s.words[word] &^= (1 << bit)
+	}
+}
+
+// Clear empties the IntSet
+func (s *IntSet) Clear() {
+	s.words = nil
+}
+
+// Copy makes a new copy of the IntSet
+func (s *IntSet) Copy() *IntSet {
+	t := IntSet{}
+	t.words = make([]uint64, len(s.words))
+	for i, sword := range s.words {
+		t.words[i] = sword
+	}
+	return &t
+}
+
 // UnionWith calculates and sets s to s union t
 func (s *IntSet) UnionWith(t *IntSet) {
 	for i, tword := range t.words {
