@@ -9,8 +9,10 @@ import (
 func main() {
 	db := database{"shoes": 50, "socks": 5}
 	mux := http.NewServeMux()
-	mux.Handle("/list", http.HandlerFunc(db.list))
-	mux.Handle("/price", http.HandlerFunc(db.price))
+	// mux.Handle("/list", http.HandlerFunc(db.list))
+	// mux.Handle("/price", http.HandlerFunc(db.price))
+	mux.HandleFunc("/list", db.list)
+	mux.HandleFunc("/price", db.price)
 	log.Println("Listen and serve on localhost:8000")
 	log.Fatal(http.ListenAndServe("localhost:8000", mux))
 }
