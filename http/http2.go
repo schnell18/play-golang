@@ -28,13 +28,13 @@ func (db database) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		item := req.URL.Query().Get("item")
 		price, ok := db[item]
 		if !ok {
-			w.WriteHeader(http.StatusNotFound)
-			fmt.Fprintf(w, "no such item %q\n", item)
+			msg := fmt.Sprintf("no such item %q\n", item)
+			http.Error(w, msg, http.StatusNotFound)
 			return
 		}
 		fmt.Fprintf(w, "%s: %s\n", item, price)
 	default:
-		w.WriteHeader(http.StatusNotFound)
-		fmt.Fprintf(w, "page %s not found\n", req.URL)
+		msg := fmt.Sprintf("page %s not found\n", req.URL)
+		http.Error(w, msg, http.StatusNotFound)
 	}
 }
