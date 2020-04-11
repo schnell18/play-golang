@@ -11,5 +11,6 @@ This is a collection mini golang projects to practise *go* programming.
 | sqrt               | calculate square root w/ [Newton method][1] |
 | switch             | simple switch statement example             |
 | prime              | sieve first n number of prime               |
+| sorting            | Sort interface demos                        |
 
 [1]: https://en.wikipedia.org/wiki/Newton%27s_method
