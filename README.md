@@ -13,5 +13,6 @@ This is a collection mini golang projects to practise *go* programming.
 | prime              | sieve first n number of prime               |
 | sorting            | Sort interface demos                        |
 | http               | Showcase http.Hanlder interface             |
+| eval               | Showcase basic arithmetic expression        |
 
 [1]: https://en.wikipedia.org/wiki/Newton%27s_method
