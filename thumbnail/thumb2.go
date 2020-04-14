@@ -10,20 +10,16 @@ import (
 )
 
 func main() {
-	files := make(chan string)
-	for _, f := range os.Args[1:] {
-		files <- f
-	}
-	total := makeThumbnails2(files)
-	fmt.Printf("Total thumbnail file size: %d", total)
+	total := makeThumbnails2(os.Args[1:])
+	fmt.Printf("Total thumbnail file size: %d\n", total)
 }
 
-func makeThumbnails2(filenames <-chan string) int64 {
+func makeThumbnails2(filenames []string) int64 {
 
 	sizes := make(chan int64)
 	var wg sync.WaitGroup
 
-	for f := range filenames {
+	for _, f := range filenames {
 		wg.Add(1)
 		go func(f string) {
 			defer wg.Done()
