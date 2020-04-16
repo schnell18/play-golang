@@ -20,5 +20,6 @@ This is a collection mini golang projects to practise *go* programming.
 | pipeline           | Showcase using chan to make pipeline                |
 | thumnail           | Showcase using chan to make parallel loop           |
 | crawl              | Showcase parallel web crawller                      |
+| countdown          | Showcase count down using io multiplex w/ `select`  |
 
 [1]: https://en.wikipedia.org/wiki/Newton%27s_method
