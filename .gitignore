@@ -4,6 +4,7 @@
 .ipr
 *.swp
 *.swo
+*.bak
 **/*.rs.bk
 **/*.o
 **/*.so

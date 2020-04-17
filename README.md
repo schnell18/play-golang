@@ -21,5 +21,6 @@ This is a collection mini golang projects to practise *go* programming.
 | thumnail           | Showcase using chan to make parallel loop           |
 | crawl              | Showcase parallel web crawller                      |
 | countdown          | Showcase count down using io multiplex w/ `select`  |
+| du                 | Showcase parallel disk usage counting               |
 
 [1]: https://en.wikipedia.org/wiki/Newton%27s_method
