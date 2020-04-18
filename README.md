@@ -22,5 +22,6 @@ This is a collection mini golang projects to practise *go* programming.
 | crawl              | Showcase parallel web crawller                      |
 | countdown          | Showcase count down using io multiplex w/ `select`  |
 | du                 | Showcase parallel disk usage counting               |
+| chat               | Showcase chat server w/ goroutine & channel         |
 
 [1]: https://en.wikipedia.org/wiki/Newton%27s_method
