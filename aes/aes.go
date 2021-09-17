@@ -48,8 +48,8 @@ func encrypt(plainText string, key string) (secretText string, err error) {
 		return
 	}
 	encrypt := cipher.NewCBCEncrypter(block, iv)
-	var source []byte = pkcs5pad([]byte(plainText), 16)
-	var dst []byte = make([]byte, len(source))
+	var source = pkcs5pad([]byte(plainText), 16)
+	var dst = make([]byte, len(source))
 	encrypt.CryptBlocks(dst, source)
 	secretText = base64.StdEncoding.EncodeToString(dst)
 	return
@@ -69,7 +69,7 @@ func decrypt(secretText string, key string) (plainText string, err error) {
 		log.Println(err)
 		return
 	}
-	var dst []byte = make([]byte, len(source))
+	dst := make([]byte, len(source))
 	encrypt.CryptBlocks(dst, source)
 	plainText = string(pkcs5unpad(dst))
 	return

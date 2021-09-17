@@ -1,4 +1,4 @@
-module github.com/schnell18/play-golang
+module play-golang
 
 go 1.14
 
