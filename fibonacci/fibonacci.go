@@ -1,3 +1,4 @@
+// Package fibonacci calculates fibonacci numbers
 package fibonacci
 
 // Fibonacci Calculate nth fibonacci number

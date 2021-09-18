@@ -16,6 +16,7 @@ const _IV = "aabbccddeeffgghh"
 func main() {
 	if len(os.Args) < 3 {
 		log.Fatalf("USAGE: %s key text1 text2 \n", os.Args[0])
+		/* this is a comment */
 		return
 	}
 	key := os.Args[1]
