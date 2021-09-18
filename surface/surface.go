@@ -6,7 +6,7 @@ import (
 	"math"
 	"net/http"
 
-	"github.com/schnell18/play-golang/eval"
+	"play-golang/eval"
 )
 
 const (
