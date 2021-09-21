@@ -2,14 +2,12 @@ package fib
 
 import "testing"
 
-type testData struct {
-	N int
-	F int
-}
-
 func TestFibonacci(t *testing.T) {
 
-	expected := []testData{
+	expected := []struct {
+		N int
+		F int
+	}{
 		{0, 0},
 		{1, 1},
 		{2, 1},

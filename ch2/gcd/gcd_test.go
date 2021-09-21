@@ -4,15 +4,13 @@ import (
 	"testing"
 )
 
-type testData struct {
-	X int64
-	Y int64
-	G int64
-}
-
 func TestGCD(t *testing.T) {
 
-	expected := []testData{
+	expected := []struct {
+		X int64
+		Y int64
+		G int64
+	}{
 		{10, 21, 1},
 		{12, 8, 4},
 		{20, 15, 5},
