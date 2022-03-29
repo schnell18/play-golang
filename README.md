@@ -23,5 +23,6 @@ This is a collection mini golang projects to practise *go* programming.
 | countdown          | Showcase count down using io multiplex w/ `select`  |
 | du                 | Showcase parallel disk usage counting               |
 | chat               | Showcase chat server w/ goroutine & channel         |
+| stall              | Showcase routine stall due to endless loop          |
 
 [1]: https://en.wikipedia.org/wiki/Newton%27s_method
