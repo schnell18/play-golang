@@ -4,20 +4,6 @@ import (
 	"github.com/xuri/excelize/v2"
 )
 
-// func main() {
-// 	f := excelize.NewFile()
-// 	sheet := f.NewSheet("order")
-
-// 	f.SetCellValue("order", "A2", "Hello universe")
-// 	f.SetCellValue("order", "B2", 100)
-
-// 	f.SetActiveSheet(sheet)
-// 	if err := f.SaveAs("book1.xlsx"); err != nil {
-// 		fmt.Fprintf(os.Stderr, "Fail to save book1.xlsv due to %v\n", err.Error())
-// 		os.Exit(3)
-// 	}
-// }
-
 func main() {
 	categories := map[string]string{
 		"A2": "Small",
@@ -57,7 +43,7 @@ func main() {
 		return
 	}
 	// 根据指定路径保存文件
-	if err := f.SaveAs("book2.xlsx"); err != nil {
+	if err := f.SaveAs("chart.xlsx"); err != nil {
 		println(err.Error())
 	}
 }
