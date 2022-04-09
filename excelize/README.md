@@ -41,3 +41,10 @@ open source excel libraies for major languages:
 - save/save as
 - import/export
 - ordinary/stream API
+- 图表工作表 (AddChartSheet)
+- 工作表背景图片 (SetSheetBackground)
+- 条件式样 (NewConditionalStyle)
+- 备注 (AddComment)
+- 数据验证 (AddDataValidation)
+- 表头锁定 (SetPanes)
+- 隐藏网格线 (ShowGridLines(false))
