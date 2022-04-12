@@ -26,7 +26,7 @@ This is a collection mini golang projects to practise *go* programming.
 | stall              | Showcase routine stall due to endless loop          |
 | zap                | Showcase logging w/ [zap][3]                        |
 | excelize           | Showcase excel processing w/ [excelize][1]          |
-| grpc               | Simple gRPC example                                 |
+| grpc               | Simple gRPC example w/ reflection and health check  |
 
 [1]: https://en.wikipedia.org/wiki/Newton%27s_method
 [2]: https://xuri.me/excelize/
