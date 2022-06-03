@@ -21,16 +21,28 @@ func main() {
 			log.Print(err)
 			continue
 		}
+		// conn.SetDeadline(<-time.After(10 * time.Second))
 		go handleConn(conn)
 	}
 }
 
 func handleConn(c net.Conn) {
-	input := bufio.NewScanner(c)
-	for input.Scan() {
-		go echo(c, input.Text(), 1*time.Second)
+	defer c.Close()
+	c1 := make(chan string)
+	go func() {
+		input := bufio.NewScanner(c)
+		for input.Scan() {
+			c1 <- input.Text()
+		}
+	}()
+	for {
+		select {
+		case <-time.After(10 * time.Second):
+			return
+		case msg := <-c1:
+			go echo(c, msg, 1*time.Second)
+		}
 	}
-	c.Close()
 }
 
 func echo(c net.Conn, shout string, delay time.Duration) {
