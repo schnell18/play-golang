@@ -27,6 +27,7 @@ This is a collection mini golang projects to practise *go* programming.
 | zap                | Showcase logging w/ [zap][3]                        |
 | excelize           | Showcase excel processing w/ [excelize][1]          |
 | grpc               | Simple gRPC example w/ reflection and health check  |
+| freecache          | Simple cache exmaple                                |
 
 [1]: https://en.wikipedia.org/wiki/Newton%27s_method
 [2]: https://xuri.me/excelize/
