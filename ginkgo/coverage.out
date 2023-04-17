@@ -1,0 +1,17 @@
+mode: set
+github.com/schnell18/play-golang/ginkgo/cart.go:16.23,17.20 1 1
+github.com/schnell18/play-golang/ginkgo/cart.go:17.20,19.3 1 1
+github.com/schnell18/play-golang/ginkgo/cart.go:23.32,25.43 2 1
+github.com/schnell18/play-golang/ginkgo/cart.go:25.43,28.3 2 1
+github.com/schnell18/play-golang/ginkgo/cart.go:28.8,31.3 2 1
+github.com/schnell18/play-golang/ginkgo/cart.go:35.45,38.41 2 1
+github.com/schnell18/play-golang/ginkgo/cart.go:38.41,39.28 1 1
+github.com/schnell18/play-golang/ginkgo/cart.go:39.28,41.4 1 1
+github.com/schnell18/play-golang/ginkgo/cart.go:41.9,44.4 2 1
+github.com/schnell18/play-golang/ginkgo/cart.go:49.38,52.28 3 1
+github.com/schnell18/play-golang/ginkgo/cart.go:56.2,56.20 1 1
+github.com/schnell18/play-golang/ginkgo/cart.go:52.28,55.3 1 1
+github.com/schnell18/play-golang/ginkgo/cart.go:60.33,63.28 3 1
+github.com/schnell18/play-golang/ginkgo/cart.go:67.2,67.19 1 1
+github.com/schnell18/play-golang/ginkgo/cart.go:63.28,66.3 1 1
+github.com/schnell18/play-golang/ginkgo/cart.go:71.39,73.2 1 1
