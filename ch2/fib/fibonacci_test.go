@@ -7,9 +7,10 @@ import (
 )
 
 func TestFibonacci(t *testing.T) {
-	expected := []struct {
-		N int
-		F int
+	assert := assert.New(t)
+	cases := []struct {
+		arg  uint64
+		want uint64
 	}{
 		{0, 0},
 		{1, 1},
@@ -27,10 +28,8 @@ func TestFibonacci(t *testing.T) {
 		{13, 233},
 		{14, 377},
 	}
-	for i, exp := range expected {
-		if actF := Fibonacci(exp.N); exp.F != actF {
-			t.Errorf("%dth test case fibonacci(%d) == %d != %d", i+1, exp.N, actF, exp.F)
-		}
+	for i, tc := range cases {
+		assert.Equal(tc.want, Fibonacci(tc.arg))
 	}
 }
 

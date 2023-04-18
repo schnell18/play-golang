@@ -5,6 +5,7 @@
 *.swp
 *.swo
 *.bak
+**/*.out
 **/*.rs.bk
 **/*.o
 **/*.so
