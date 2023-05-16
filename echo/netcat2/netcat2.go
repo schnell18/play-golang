@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"net"
@@ -15,6 +16,7 @@ func main() {
 	defer conn.Close()
 	go mustCopy(os.Stdout, conn)
 	mustCopy(conn, os.Stdin)
+
 }
 
 func mustCopy(dst io.Writer, src io.Reader) {
