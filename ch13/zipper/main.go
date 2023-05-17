@@ -4,7 +4,8 @@ import (
 	"io"
 	"log"
 	"os"
-	"play-golang/ch13/bzip"
+
+	"github.com/schnell18/play-golang/ch13/bzip"
 )
 
 func main() {

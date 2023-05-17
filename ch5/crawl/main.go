@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"play-golang/ch5/crawl/links"
+
+	"github.com/schnell18/play-golang/ch5/crawl/links"
 )
 
 func main() {

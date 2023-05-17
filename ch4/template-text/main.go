@@ -3,9 +3,10 @@ package main
 import (
 	"log"
 	"os"
-	"play-golang/ch4/github"
 	"text/template"
 	"time"
+
+	"github.com/schnell18/play-golang/ch4/github"
 )
 
 const templ = `{{len .Items}}/{{.TotalCount}} issues:

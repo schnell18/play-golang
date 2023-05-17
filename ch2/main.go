@@ -3,8 +3,9 @@ package main
 import (
 	"fmt"
 	"os"
-	"play-golang/ch2/tempconv"
 	"strconv"
+
+	"github.com/schnell18/play-golang/ch2/tempconv"
 )
 
 func main() {
@@ -17,6 +18,14 @@ func main() {
 		f := tempconv.Fahrenheit(t)
 		c := tempconv.Celsius(t)
 		k := tempconv.Kelvin(t)
-		fmt.Printf("%s = %s, %s = %s, %s = %s\n", f, tempconv.FToC(f), c, tempconv.CToF(c), k, tempconv.KToC(k))
+		fmt.Printf(
+			"%s = %s, %s = %s, %s = %s\n",
+			f,
+			tempconv.FToC(f),
+			c,
+			tempconv.CToF(c),
+			k,
+			tempconv.KToC(k),
+		)
 	}
 }

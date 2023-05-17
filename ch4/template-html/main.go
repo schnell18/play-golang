@@ -4,8 +4,9 @@ import (
 	"html/template"
 	"log"
 	"os"
-	"play-golang/ch4/github"
 	"time"
+
+	"github.com/schnell18/play-golang/ch4/github"
 )
 
 const templ = `

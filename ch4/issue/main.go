@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"play-golang/ch4/github"
+
+	"github.com/schnell18/play-golang/ch4/github"
 )
 
 func main() {
@@ -16,5 +17,4 @@ func main() {
 	for _, item := range result.Items {
 		fmt.Printf("#%06d %9.9s %.55s\n", item.Number, item.User.Login, item.Title)
 	}
-
 }
