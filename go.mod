@@ -17,6 +17,11 @@ require (
 )
 
 require (
+	github.com/Masterminds/semver/v3 v3.2.1
+	github.com/sigurn/crc8 v0.0.0-20220107193325-2243fe600f9f
+)
+
+require (
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
