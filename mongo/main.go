@@ -23,10 +23,12 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	cred := options.Credential{
-		Username: "root",
-		Password: "root",
+		Username: "localenv",
+		Password: "localenv",
 	}
-	options := options.Client().ApplyURI("mongodb://localhost:27017").SetAuth(cred)
+	options := options.Client().
+		ApplyURI("mongodb://localhost:27017").
+		SetAuth(cred)
 	client, err := mongo.Connect(ctx, options)
 	defer func() {
 		if err = client.Disconnect(ctx); err != nil {
@@ -37,8 +39,12 @@ func main() {
 	if err != nil {
 		log.Fatalf("Unable to ping mongodb due to:%v", err)
 	}
+
 	collection := client.Database("testing").Collection("numbers")
-	document := bson.D{{"name", "pi"}, {"value", 3.14159}}
+	document := bson.D{
+		{Key: "name", Value: "pi"},
+		{Key: "value", Value: 3.14159},
+	}
 	res, err := collection.InsertOne(ctx, document)
 	if err != nil {
 		log.Fatalf("Fail to insert document %v due to %v", document, err)
