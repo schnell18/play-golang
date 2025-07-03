@@ -33,6 +33,11 @@ This is a collection mini golang projects to practise *go* programming.
 | nic                | Explore net interface card APIs                     |
 | ldflags-ver        | Using ldflags to set version for oo applications    |
 | s3-client-encrypt  | Showcase S3 client-side encrypt with OpenBao        |
+| qr-code-wrapper    | An HTTP server delegates QR code generation         |
+| cpu                | Demonstrates detection CPU in golang                |
+| panic              | Demonstrates how to handle panic properly           |
+| string-loop        | Shows improper String impl introduces dead loop     |
+| enum               | Shows how to define enum in golang using iota       |
 
 [1]: https://en.wikipedia.org/wiki/Newton%27s_method
 [2]: https://xuri.me/excelize/
