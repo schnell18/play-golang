@@ -23,6 +23,14 @@ func BenchmarkMemoryWasteBLoop(b *testing.B) {
 	}
 }
 
+func BenchmarkMemoryWasteParallel(b *testing.B) {
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			MemoryWaste(100)
+		}
+	})
+}
+
 func BenchmarkMemoryWasteBLoop2(b *testing.B) {
 	for b.Loop() {
 		MemoryWaste2(100)

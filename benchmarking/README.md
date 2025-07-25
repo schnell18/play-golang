@@ -18,6 +18,17 @@ Implement benchmark code using `testing.B` similar to:
 As a convention, the function name should start with `Benckmark`.
 The `b.N` controls the loop count, and can be customized using CLI switch.
 
+You can also run benchmarking in parallel:
+
+    func BenchmarkMemoryWasteParallel(b *testing.B) {
+        b.RunParallel(func(pb *testing.PB){
+            for pb.Next() {
+                MemoryWaste(100)
+            }
+        })
+    }
+
+
 With go 1.24, [testing.B.Loop][1] is recommended way to write benchmarking code:
 
     func Benchmark(b *testing.B) {
@@ -50,5 +61,21 @@ to select benchmarking methods to execute. For example:
 
 This command runs all benchmarking methods with a `BenchmarkMemoryWaste` prefix
 by printing memory allocation statistics.
+
+## Compare benchmarking results
+
+The `benchstat` compares the difference of two benchmarking runs. This tool
+can be installed using:
+
+    go install golang.org/x/perf/cmd/benchstat@latest
+
+Then generates two benchmarking results by:
+
+    go test ./... -bench='^BenchmarkMemoryWaste$' -benchmem -count=5 > unoptimized.bench
+    go test ./... -bench='^BenchmarkMemoryWaste2$' -benchmem -count=5 > optimized.bench
+
+Use benchstat to compare the difference:
+
+    benchstat unoptimized.bench optimized.bench
 
 [1]: https://go.dev/blog/testing-b-loop
