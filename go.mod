@@ -1,6 +1,6 @@
 module github.com/schnell18/play-golang
 
-go 1.20
+go 1.23
 
 require (
 	github.com/coocood/freecache v1.2.1
@@ -18,6 +18,8 @@ require (
 
 require (
 	github.com/Masterminds/semver/v3 v3.2.1
+	github.com/joho/godotenv v1.5.1
+	github.com/pkg/profile v1.7.0
 	github.com/sigurn/crc8 v0.0.0-20220107193325-2243fe600f9f
 )
 
@@ -31,7 +33,6 @@ require (
 	github.com/klauspost/compress v1.16.7 // indirect
 	github.com/montanaflynn/stats v0.7.1 // indirect
 	github.com/nxadm/tail v1.4.8 // indirect
-	github.com/pkg/profile v1.7.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
 	github.com/xdg-go/scram v1.1.2 // indirect
