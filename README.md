@@ -38,6 +38,7 @@ This is a collection mini golang projects to practise *go* programming.
 | panic              | Demonstrates how to handle panic properly           |
 | string-loop        | Shows improper String impl introduces dead loop     |
 | enum               | Shows how to define enum in golang using iota       |
+| testcontainer      | Shows how to use testcontainer to conduct intg-test |
 
 [1]: https://en.wikipedia.org/wiki/Newton%27s_method
 [2]: https://xuri.me/excelize/
