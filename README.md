@@ -40,6 +40,7 @@ This is a collection mini golang projects to practise *go* programming.
 | enum               | Shows how to define enum in golang using iota       |
 | testcontainer      | Shows how to use testcontainer to conduct intg-test |
 | ulid               | Shows [Universally Unique Lexi Sortable ID][4]      |
+| oapi               | API first development with OAS                      |
 
 [1]: https://en.wikipedia.org/wiki/Newton%27s_method
 [2]: https://xuri.me/excelize/

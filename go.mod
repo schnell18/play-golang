@@ -1,6 +1,6 @@
 module github.com/schnell18/play-golang
 
-go 1.23.0
+go 1.24
 
 require (
 	github.com/coocood/freecache v1.2.1
