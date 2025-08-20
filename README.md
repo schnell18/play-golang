@@ -39,7 +39,9 @@ This is a collection mini golang projects to practise *go* programming.
 | string-loop        | Shows improper String impl introduces dead loop     |
 | enum               | Shows how to define enum in golang using iota       |
 | testcontainer      | Shows how to use testcontainer to conduct intg-test |
+| ulid               | Shows [Universally Unique Lexi Sortable ID][4]      |
 
 [1]: https://en.wikipedia.org/wiki/Newton%27s_method
 [2]: https://xuri.me/excelize/
 [3]: https://github.com/uber-go/zap
+[4]: https://github.com/ulid/spec
