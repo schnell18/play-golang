@@ -42,6 +42,7 @@ This is a collection mini golang projects to practise *go* programming.
 | ulid               | Shows [Universally Unique Lexi Sortable ID][4]      |
 | oapi               | API first development with OAS using oapi-codegen   |
 | ogen               | API first development with OAS using ogen           |
+| cacheable          | Explore declarative cache managment using codegen   |
 
 [1]: https://en.wikipedia.org/wiki/Newton%27s_method
 [2]: https://xuri.me/excelize/
