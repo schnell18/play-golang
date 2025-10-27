@@ -43,6 +43,9 @@ This is a collection mini golang projects to practise *go* programming.
 | oapi               | API first development with OAS using oapi-codegen   |
 | ogen               | API first development with OAS using ogen           |
 | cacheable          | Explore declarative cache managment using codegen   |
+| jwt-keyfunc        | Explore JWT validation using keyfunc                |
+| jwt-jwx            | Explore JWT validation using jwx                    |
+| jwt-gooidc         | Explore JWT validation using go-oidc                |
 
 [1]: https://en.wikipedia.org/wiki/Newton%27s_method
 [2]: https://xuri.me/excelize/
