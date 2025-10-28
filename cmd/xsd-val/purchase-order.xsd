@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://example.com/purchase"
+           xmlns="http://example.com/purchase"
+           elementFormDefault="qualified">
+
+  <!-- Simple type restricting currency codes -->
+  <xs:simpleType name="CurrencyCode">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z]{3}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Address type -->
+  <xs:complexType name="AddressType">
+    <xs:sequence>
+      <xs:element name="Street" type="xs:string"/>
+      <xs:element name="City" type="xs:string"/>
+      <xs:element name="PostalCode" type="xs:string"/>
+      <xs:element name="Country" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Item type -->
+  <xs:complexType name="ItemType">
+    <xs:sequence>
+      <xs:element name="ProductName" type="xs:string"/>
+      <xs:element name="Quantity" type="xs:positiveInteger"/>
+      <xs:element name="UnitPrice" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- PurchaseOrder root element -->
+  <xs:element name="PurchaseOrder">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="OrderNumber" type="xs:string"/>
+        <xs:element name="OrderDate" type="xs:date"/>
+        <xs:element name="Currency" type="CurrencyCode"/>
+        <xs:element name="CustomerAddress" type="AddressType"/>
+        <xs:element name="Items">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Item" type="ItemType" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="priority" type="xs:string" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
+

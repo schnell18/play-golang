@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PurchaseOrder xmlns="http://example.com/purchase">
+  <OrderNumber>PO-2025-002</OrderNumber>
+  <OrderDate>29-10-2025</OrderDate> <!-- ❌ Wrong date format -->
+  <Currency>NZ</Currency>            <!-- ❌ Only 2 letters -->
+  <CustomerAddress>
+    <Street>34 Main Rd</Street>
+    <City>Wellington</City>
+    <!-- ❌ Missing PostalCode -->
+    <Country>New Zealand</Country>
+  </CustomerAddress>
+  <Items>
+    <Item>
+      <ProductName>Laptop</ProductName>
+      <Quantity>-1</Quantity>        <!-- ❌ Not positive -->
+      <UnitPrice>1800.00</UnitPrice>
+    </Item>
+  </Items>
+</PurchaseOrder>
+

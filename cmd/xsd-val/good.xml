@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PurchaseOrder xmlns="http://example.com/purchase">
+  <OrderNumber>PO-2025-001</OrderNumber>
+  <OrderDate>2025-10-29</OrderDate>
+  <Currency>NZD</Currency>
+  <CustomerAddress>
+    <Street>12 Queen St</Street>
+    <City>Auckland</City>
+    <PostalCode>1010</PostalCode>
+    <Country>New Zealand</Country>
+  </CustomerAddress>
+  <Items>
+    <Item>
+      <ProductName>Wireless Mouse</ProductName>
+      <Quantity>2</Quantity>
+      <UnitPrice>35.50</UnitPrice>
+    </Item>
+    <Item>
+      <ProductName>Keyboard</ProductName>
+      <Quantity>1</Quantity>
+      <UnitPrice>79.99</UnitPrice>
+    </Item>
+  </Items>
+</PurchaseOrder>
+
