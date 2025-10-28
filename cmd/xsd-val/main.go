@@ -1,31 +1,7 @@
-// Validate XML against XSD in Go using cgo libxml2 binding
+// xsd_validation.go
+// Fixed: working cgo example that compiles and returns structured validation errors
+
 package main
-
-import (
-	"fmt"
-	"os"
-	"unsafe"
-)
-
-// -----------------------------
-// Approach A: using lestrrat-go/libxml2 (recommended)
-// -----------------------------
-// go get github.com/lestrrat-go/libxml2
-// go get github.com/lestrrat-go/libxml2/xsd
-
-/*
-Example usage:
-  err := ValidateWithLibxml2Go("example.xml", "schema.xsd")
-  if err != nil { // validation failed }
-*/
-
-// NOTE: keep this code sketchy — check the library docs for exact APIs and error types.
-
-// -----------------------------
-// Approach B: using cgo -> libxml2 C API
-// -----------------------------
-// Requires libxml2 development headers installed (e.g. libxml2-dev on Debian/Ubuntu)
-// Build: go build (requires pkg-config + libxml2 available)
 
 /*
 #cgo pkg-config: libxml-2.0
@@ -33,24 +9,61 @@ Example usage:
 #include <libxml/tree.h>
 #include <libxml/xmlschemas.h>
 #include <stdlib.h>
+#include <stdarg.h>
+#include <string.h>
+
+// Error callback: append formatted message into ctx (a char buffer)
+static void schemaErrorCallback(void *ctx, const char *msg, ...) {
+    if (ctx == NULL) return;
+    char *buf = (char*)ctx;
+    size_t cur = strlen(buf);
+    if (cur >= 8191) return; // no space
+
+    va_list ap;
+    va_start(ap, msg);
+    vsnprintf(buf + cur, 8192 - cur, msg, ap);
+    va_end(ap);
+}
+
+// Helper to set both error and warning callbacks (avoids passing function pointers from Go)
+static void set_schema_errors(xmlSchemaValidCtxtPtr valid_ctxt, void *ctx) {
+    xmlSchemaSetValidErrors(valid_ctxt, (xmlSchemaValidityErrorFunc)schemaErrorCallback, (xmlSchemaValidityWarningFunc)schemaErrorCallback, ctx);
+}
 */
 import "C"
 
-// ValidateWithCgo validates the XML file at xmlPath against the XSD file at xsdPath using libxml2 C API.
-// Returns nil on success or an error describing the validation failure.
+import (
+	"fmt"
+	"os"
+	"strings"
+	"unsafe"
+)
+
+// ValidationError aggregates validation messages
+type ValidationError struct {
+	Errors []string
+}
+
+func (e *ValidationError) Error() string {
+	return fmt.Sprintf(
+		"%d validation error(s):\n%s",
+		len(e.Errors),
+		strings.Join(e.Errors, "\n"),
+	)
+}
+
+// ValidateWithCgo validates an XML file against an XSD file using libxml2 C API.
+// Returns nil on success or *ValidationError on validation problems.
 func ValidateWithCgo(xmlPath, xsdPath string) error {
-	// Read C strings
 	xsdC := C.CString(xsdPath)
 	defer C.free(unsafe.Pointer(xsdC))
 
 	xmlC := C.CString(xmlPath)
 	defer C.free(unsafe.Pointer(xmlC))
 
-	// Initialize libxml
 	C.xmlInitParser()
 	defer C.xmlCleanupParser()
 
-	// Parse the schema
 	schemaParserCtx := C.xmlSchemaNewParserCtxt(xsdC)
 	if schemaParserCtx == nil {
 		return fmt.Errorf("failed to create schema parser context")
@@ -63,55 +76,60 @@ func ValidateWithCgo(xmlPath, xsdPath string) error {
 	}
 	defer C.xmlSchemaFree(schema)
 
-	// Create validation context
 	validCtxt := C.xmlSchemaNewValidCtxt(schema)
 	if validCtxt == nil {
 		return fmt.Errorf("failed to create schema validation context")
 	}
 	defer C.xmlSchemaFreeValidCtxt(validCtxt)
 
-	// Parse the XML document
+	// Prepare buffer for C callback to write into
+	buf := make([]byte, 8192) // zero-initialized
+
+	// set callbacks via helper function defined in C above
+	C.set_schema_errors(validCtxt, unsafe.Pointer(&buf[0]))
+
 	doc := C.xmlReadFile(xmlC, nil, 0)
 	if doc == nil {
 		return fmt.Errorf("failed to parse XML document")
 	}
 	defer C.xmlFreeDoc(doc)
 
-	// Validate
 	ret := C.xmlSchemaValidateDoc(validCtxt, doc)
-	if ret == 0 {
-		// success
-		return nil
+
+	// Extract string up to first NUL
+	n := 0
+	for ; n < len(buf); n++ {
+		if buf[n] == 0 {
+			break
+		}
 	}
-	// non-zero: validation failed or error
-	return fmt.Errorf(
-		"validation failed (xmlSchemaValidateDoc returned %d)",
-		int(ret),
-	)
-}
+	msg := strings.TrimSpace(string(buf[:n]))
 
-// -----------------------------
-// Small helper to show how the libxml2 Go wrapper approach might look
-// (This is a sketch — add the real import path and error handling as needed.)
-// -----------------------------
+	if ret != 0 || msg != "" {
+		var lines []string
+		if msg != "" {
+			for l := range strings.SplitSeq(msg, "\n") {
+				l = strings.TrimSpace(l)
+				if l != "" {
+					lines = append(lines, l)
+				}
+			}
+		}
+		// If xmlSchemaValidateDoc returned non-zero but no message was captured, add a generic message
+		if len(lines) == 0 {
+			lines = append(
+				lines,
+				fmt.Sprintf(
+					"xmlSchemaValidateDoc returned %d (validation failed)",
+					int(ret),
+				),
+			)
+		}
+		return &ValidationError{Errors: lines}
+	}
 
-/*
-func ValidateWithLibxml2Go(xmlPath, xsdPath string) error {
-	// Example (pseudocode):
-	// import libxml2 "github.com/lestrrat-go/libxml2"
-	// import xsd "github.com/lestrrat-go/libxml2/xsd"
-	//
-	// buf, _ := ioutil.ReadFile(xmlPath)
-	// doc, err := libxml2.ParseString(string(buf))
-	// defer doc.Free()
-	// schema, err := xsd.ParseFromFile(xsdPath)
-	// defer schema.Free()
-	// if err := schema.Validate(doc); err != nil {
-	//     return err
-	// }
-	// return nil
+	return nil
 }
-*/
 
 func main() {
 	if len(os.Args) < 3 {
@@ -122,7 +140,6 @@ func main() {
 	xmlPath := os.Args[1]
 	xsdPath := os.Args[2]
 
-	// Example: try CGO approach
 	err := ValidateWithCgo(xmlPath, xsdPath)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Validation failed: %v\n", err)
