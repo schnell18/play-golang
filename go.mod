@@ -34,6 +34,7 @@ require (
 	github.com/sigurn/crc8 v0.0.0-20220107193325-2243fe600f9f
 	github.com/testcontainers/testcontainers-go v0.38.0
 	github.com/testcontainers/testcontainers-go/modules/redis v0.38.0
+	github.com/traefik/yaegi v0.16.1
 	gofr.dev v1.54.0
 	golang.org/x/sync v0.19.0
 	google.golang.org/adk v0.3.0
